@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo SaaS</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #020617; color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-[#020617] text-white min-h-screen flex flex-col justify-between">
+
+    <!-- CABEÇALHO -->
+    <header class="bg-slate-900/80 border-b border-slate-800 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="font-extrabold text-sm flex items-center gap-2">
+            <div class="w-8 h-8 rounded-full bg-amber-500 flex items-center justify-center text-slate-950">
+                <i class="fa-solid fa-store"></i>
+            </div>
+            <span>Painel SaaS</span>
+        </div>
+        <button onclick="abrirModal()" class="bg-amber-600 hover:bg-amber-700 text-white px-4 py-2 rounded-xl text-xs font-bold transition shadow-lg">
+            <i class="fa-solid fa-right-to-bracket mr-1"></i> Fazer Login
+        </button>
+    </header>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="max-w-md mx-auto px-4 py-16 text-center flex-1 flex flex-col justify-center">
+        <div class="bg-slate-900/60 border border-slate-800 p-8 rounded-3xl shadow-2xl">
+            <div class="w-16 h-16 bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl border border-amber-500/20">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <h1 class="text-2xl font-black mb-2">Acesso ao Sistema</h1>
+            <p class="text-xs text-slate-400 mb-6">Clique no botão abaixo para abrir a janela de autenticação do lojista ou master.</p>
+            <button onclick="abrirModal()" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-4 rounded-xl shadow-lg transition">
+                Entrar no Sistema
+            </button>
+        </div>
+    </main>
+
+    <!-- MODAL DE LOGIN -->
+    <div id="modal-login" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+        <div class="bg-slate-900 border border-slate-800 rounded-3xl p-8 max-w-sm w-full shadow-2xl relative">
+            <button onclick="fecharModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white text-lg">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            <div class="text-center mb-6">
+                <div class="w-14 h-14 bg-blue-500/10 text-blue-500 rounded-full flex items-center justify-center mx-auto mb-3 text-xl border border-blue-500/20">
+                    <i class="fa-solid fa-user-lock"></i>
+                </div>
+                <h2 class="text-xl font-black">Autenticação</h2>
+            </div>
+            <div class="space-y-4">
+                <input type="email" id="input-email" placeholder="O seu E-mail" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-white outline-none focus:border-blue-500">
+                <input type="password" id="input-senha" placeholder="A sua Senha" class="w-full bg-slate-950 border border-slate-800 rounded-xl p-4 text-sm text-white outline-none focus:border-blue-500">
+                <button onclick="fazerLogin()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-4 rounded-xl shadow-lg transition">
+                    Entrar Agora
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPT DE CONTROLO -->
+    <script>
+        function abrirModal() {
+            document.getElementById('modal-login').style.display = 'flex';
+        }
+        function fecharModal() {
+            document.getElementById('modal-login').style.display = 'none';
+        }
+
+        const MASTER_EMAIL = "matthecarvalho@gmail.com";
+        const MASTER_PASS = "Onerepublic";
+
+        function fazerLogin() {
+            const email = document.getElementById('input-email').value.trim();
+            const senha = document.getElementById('input-senha').value.trim();
+
+            if (email === MASTER_EMAIL && senha === MASTER_PASS) {
+                alert('Login Master efetuado com sucesso!');
+                fecharModal();
+                return;
+            }
+
+            if (email === "" || senha === "") {
+                alert('Preencha o e-mail e a senha!');
+                return;
+            }
+
+            alert('Credenciais enviadas. (Para testes, utilize o e-mail Master configurado).');
+        }
+    </script>
+</body>
+</html>
